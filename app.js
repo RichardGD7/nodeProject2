@@ -14,10 +14,6 @@ app.use(cors('*'));
 app.use(express.json())
 app.use(morgan('dev'))
 
-app.get('/usuarios',(req,res) => {
-    res.send('Hola, estoy funcionando como get')
-})
-
 //Importacion de rutas
 app.use('/',routes)
 //app.use('/api',routes)

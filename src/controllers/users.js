@@ -10,6 +10,7 @@ module.exports = {
     // next({status: 200, send: {msg: "Usuario encontrado", data: {}}})
     // },
     post: async (req, res, next) => {
+        console.log(req.body)
         try {
             let user = await User.create(req.body)
             next({status: 201, send: {msg: "Usuario creado", data: user}})
