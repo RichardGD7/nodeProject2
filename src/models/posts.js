@@ -1,16 +1,8 @@
 const mongoose = require('mongoose')
 
 const postSchema = new mongoose.Schema({
-    comments:{
-        type: String,
-    },
-
-    comments_count: {
-        type: String,
-    },
-
     comments: {
-        type: String,
+        type: Array,
     },
 
     comments_count: {
@@ -38,7 +30,7 @@ const postSchema = new mongoose.Schema({
     },
 
     tags: {
-        type: String,
+        type: Array,
     },
 
     title: {

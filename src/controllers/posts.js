@@ -5,6 +5,11 @@ module.exports = {
         let posts = await Post.find()
         if (!posts) next({status: 404, send:{msg: "Usuarios no encontrados"}})
         next({status:201, send: {msg: "Usuario encotrado", data: posts}})
-    }
-
+    },
+    getbyId: async (req, res, next) => {
+        const {id} = req.params
+        let selectpost = await Post.findById(id)
+        if (!selectpost) next({status: 404, send:{msg: "Usuarios no encontrados"}})
+        next({status:201, send: {msg: "Usuario encotrado", data: selectpost}})
+    },
 }
