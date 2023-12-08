@@ -6,9 +6,13 @@ module.exports = {
     //     next({status: 200, send: {msg: "Usuarios", data: []}})
     // },
     
-    // getById: async (req, res, next) => {
-    // next({status: 200, send: {msg: "Usuario encontrado", data: {}}})
-    // },
+    getbyId: async (req, res, next) => {
+        const {id} = req.params
+        let selectuser = await Post.findById(id)
+        if (!selectuser) next({status: 404, send:{msg: "Usuario no encontrado"}})
+        next({status:201, send: {msg: "Usuario encotrado", data: selectuser}})
+    },
+    
     post: async (req, res, next) => {
         console.log(req.body)
         try {
