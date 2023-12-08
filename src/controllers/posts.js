@@ -12,4 +12,7 @@ module.exports = {
         if (!selectpost) next({status: 404, send:{msg: "Usuarios no encontrados"}})
         next({status:201, send: {msg: "Usuario encotrado", data: selectpost}})
     },
+    delete: async (req, res, next) => {
+        next({status: 200, send: {msg: "Post Eliminado", data: {}}}) 
+    },
 }
