@@ -3,7 +3,9 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require("cors");
 const routes = require('./src/routes/index')
+const publicRoutes = require('./src/public/routes/index')
 const db = require('./src/utils/db')
+const jwt = require('./src/utils/jwt')
 const app = express()
 const port = process.env.PORT || 3000
 
@@ -15,8 +17,8 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //Importacion de rutas
-app.use('/',routes)
-//app.use('/api',routes)
+app.use('/', publicRoutes)
+app.use('/api', jwt.verify, routes)
 
 
 

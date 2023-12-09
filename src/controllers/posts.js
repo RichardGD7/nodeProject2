@@ -26,5 +26,11 @@ module.exports = {
         let selectpost = await Post.findByIdAndDelete(id)
         if (!selectpost) next({status: 401, send:{msg: "No se pudo borrar la publicación"}})
         next({status:201, send: {msg: "Publicación borrada con éxito", data: selectpost}})
+    },
+    putPost: async(req, res, next) => {
+        const {id} = req.params
+        let selectpost = await Post.findByIdAndUpdate(id,req.body)
+        if (!selectpost) next({status: 401, send:{msg: "No se pudo encontrar la publicación"}})
+        next({status:201, send: {msg: "Publicación modificada con éxito", data: req.body}})
     }
 }

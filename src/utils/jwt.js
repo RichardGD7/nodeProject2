@@ -4,7 +4,7 @@ const User = require('../models/users')
 
 module.exports = {
     create: (data) => {
-        let token = jwt.sign({_id: data._id}, JWT_SECRET, {expiresIn: 6000})
+        let token = jwt.sign({_id: data._id, email: data.email}, JWT_SECRET, {expiresIn: 6000})
         return token
     },
     verify: (req, res, next) => {
@@ -12,12 +12,12 @@ module.exports = {
         const dateNow = new Date()
 
         if (!token) {
-           res.status(401).send({msg: "Usuario no autorizado"}) 
+           return res.status(401).send({msg: "Usuario no autorizado1"}) 
         }
         jwt.verify(token, JWT_SECRET, async (err, decode) => {
-            if (err) res.status(401).send({msg: "Token invalido"})
+            if (err) return res.status(401).send({msg: "Token invalido"})
             if (decode.exp < dateNow.getTime() / 1000) {
-               res.status(401).send({msg: "Sesion expirada"}) 
+               return res.status(401).send({msg: "Sesion expirada"}) 
             }
             req.loginUser = await User.findById(decode._id)
             next()

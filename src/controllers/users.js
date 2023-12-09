@@ -1,10 +1,8 @@
 //Los modelos se importan empezando con mayusculas
 const User = require('../models/users')
+const jwt = require('../utils/jwt')
 
 module.exports = {
-    // getAll: async (req, res, next) => {
-    //     next({status: 200, send: {msg: "Usuarios", data: []}})
-    // },
     
     getbyId: async (req, res, next) => {
         const {id} = req.params
@@ -22,11 +20,20 @@ module.exports = {
             next({status: 400, send: {msg: "Usuario no creado", err: error}})
         }
     },
-    // put: async (req, res, next) => {
-    //     next({status: 200, send: {msg: "Usuario actualizado", data: {}}})
-    // },
-    // delete: async (req, res, next) => {
-    //     next({status: 200, send: {msg: "Usuario elimninado", data: {}}})
-    // }
+    login: async (req, res, next) => {
+        try {
+            let user = await User.findOne({email: req.body.email})
+            if(user.password != req.body.password) {
+                next({status: 401, send: {msg: "Email o password incorrecto"}})
+            }
+            //delete user.password
+            let token = jwt.create(user)
+            next({status:200, send: {msg: "Acceso autorizado", token: token}})
+        } catch (error) {
+            console.log(error)
+            next({status: 401, send: {msg: "Acceso no autorizado", err:error}})
+            
+        }
+    }
 
 }
