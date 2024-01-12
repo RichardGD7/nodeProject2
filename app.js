@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(cors("*"));
 
 app.use(express.json());
-app.use(morgan("dev"));
+//app.use(morgan("dev"));
 
 //Importacion de rutas
 app.use("/", publicRoutes);
@@ -23,6 +23,10 @@ app.use((resp, req, res, next) => {
   res.status(resp.status).send(resp.send);
 });
 
+// app.use((resp, req, res, next) => {
+//   console.log(resp);
+// });
+
 db.connect()
   .then(() => {
     app.listen(port, () => {
@@ -30,5 +34,5 @@ db.connect()
     });
   })
   .catch((error) => {
-    console.log("DB conection error", error);
+    console.log("DB conection error");
   });

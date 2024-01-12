@@ -4,12 +4,12 @@ const userController = require("../../controllers/users");
 const postController = require("../../controllers/posts");
 
 //Users
-router.get("/:id", userController.getbyId); //publico
-router.post("/", userController.post); //publico
-router.post("/auth/login", userController.login); //publico
+router.get("/users/:id", userController.getbyId); //publico
+router.post("/users", userController.post); //publico
+router.post("/users/auth/login", userController.login); //publico
 
 //Posts
-router.get("/", postController.getAll); //publico
-router.get("/:id", postController.getbyId); //publico
+router.get("/posts", postController.getAll); //publico
+router.get("/posts/:id", postController.getbyId); //publico
 
 module.exports = router;
