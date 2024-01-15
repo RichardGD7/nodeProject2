@@ -34,7 +34,7 @@ module.exports = {
           msg: "Acceso autorizado",
           token: token,
           imgprofile: user.imgprofile,
-          username: user.username,
+          name: user.name,
         },
       });
     } catch (error) {
