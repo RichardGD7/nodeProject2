@@ -28,7 +28,15 @@ module.exports = {
       }
       //delete user.password
       let token = jwt.create(user);
-      next({ status: 200, send: { msg: "Acceso autorizado", token: token } });
+      next({
+        status: 200,
+        send: {
+          msg: "Acceso autorizado",
+          token: token,
+          imgprofile: user.imgprofile,
+          username: user.username,
+        },
+      });
     } catch (error) {
       console.log(error);
       next({ status: 401, send: { msg: "Acceso no autorizado", err: error } });
