@@ -7,7 +7,7 @@ module.exports = {
       let conection = await mongoose.connect(URI);
       if (conection) console.log("DB Connected");
     } catch (error) {
-      console.log("Error connect");
+      console.log("Error connect", error);
     }
   },
   disconnect: (done) => {
